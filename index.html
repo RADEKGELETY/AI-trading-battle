@@ -1,397 +1,1282 @@
 <!DOCTYPE html>
-<html lang="cs" class="scroll-smooth">
+<html lang="cs">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ROBOOTEC.AI – Crowdfunding</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>FTMO × ROBOOTEC.AI | HUMAN vs AI | FIRST LIVE TRADING BATTLE</title>
+    <meta
+      name="description"
+      content="Historicky prvni verejny Human vs AI trading event. FTMO × ROBOOTEC.AI, O2 universum Praha."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg-1: #05070f;
-        --bg-2: #0b1330;
-        --bg-3: #070b18;
-        --accent-1: #4fd1ff;
-        --accent-2: #8b5cf6;
-        --accent-3: #22d3ee;
+        --bg: #05070d;
+        --ink: #edf6ff;
+        --muted: #9cb2d4;
+        --line: rgba(129, 163, 220, 0.26);
+        --blue: #35b7ff;
+        --green: #42efb4;
+        --panel: linear-gradient(160deg, rgba(10, 19, 36, 0.93), rgba(6, 11, 22, 0.9));
+        --radius: 16px;
+        --header-h: 72px;
       }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
-        background: radial-gradient(1200px 600px at 20% -10%, #0b1a3a 0%, transparent 60%),
-                    radial-gradient(1000px 500px at 80% 0%, #160f3a 0%, transparent 55%),
-                    linear-gradient(180deg, var(--bg-1), var(--bg-2) 40%, var(--bg-3) 100%);
-        font-family: "Space Grotesk", "Sora", sans-serif;
+        margin: 0;
+        color: var(--ink);
+        font-family: "IBM Plex Sans", sans-serif;
+        line-height: 1.62;
+        background:
+          radial-gradient(circle at 16% -10%, rgba(61, 158, 255, 0.2), transparent 40%),
+          radial-gradient(circle at 84% 2%, rgba(67, 243, 181, 0.12), transparent 35%),
+          linear-gradient(170deg, #04050a 0%, #060b16 40%, #05070d 100%);
+        overflow-x: hidden;
       }
-      .glow {
-        box-shadow:
-          0 0 0.5rem rgba(79, 209, 255, 0.35),
-          0 0 2rem rgba(139, 92, 246, 0.25);
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
       }
-      .fade-up {
+
+      body::before {
+        background-image:
+          linear-gradient(rgba(36, 66, 108, 0.16) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(36, 66, 108, 0.16) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(circle at center, black 34%, transparent 84%);
+        opacity: 0.24;
+      }
+
+      body::after {
+        background:
+          radial-gradient(circle at 52% -20%, rgba(50, 143, 255, 0.2), transparent 42%),
+          radial-gradient(circle at 50% 120%, rgba(66, 238, 181, 0.14), transparent 40%);
+      }
+
+      .container {
+        width: min(1160px, 92vw);
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: fixed;
+        inset: 0 0 auto 0;
+        height: var(--header-h);
+        z-index: 50;
+        border-bottom: 1px solid rgba(117, 151, 208, 0.24);
+        background: linear-gradient(180deg, rgba(6, 11, 21, 0.92), rgba(6, 11, 21, 0.58));
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .header-row {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .brand {
+        font-family: "Sora", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .brand .x {
+        color: var(--blue);
+      }
+
+      .hero {
+        position: relative;
+        min-height: 100svh;
+        padding-top: calc(var(--header-h) + 4rem);
+        padding-bottom: 2.7rem;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+      }
+
+      .hero::before {
+        inset: -5% -10% auto;
+        height: 62%;
+        background:
+          radial-gradient(circle at 24% 32%, rgba(50, 168, 255, 0.25), transparent 38%),
+          radial-gradient(circle at 80% 20%, rgba(66, 243, 181, 0.18), transparent 42%);
+        filter: blur(12px);
+      }
+
+      .hero::after {
+        inset: auto 0 0;
+        height: 34%;
+        background:
+          linear-gradient(180deg, transparent, rgba(4, 8, 16, 0.86)),
+          radial-gradient(ellipse at center bottom, rgba(20, 38, 70, 0.56), transparent 70%);
+      }
+
+      .hero-watermark {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        background-image:
+          linear-gradient(90deg, rgba(5, 9, 18, 0.74) 0%, rgba(5, 9, 18, 0.32) 50%, rgba(5, 9, 18, 0.72) 100%),
+          url("./assets/human-vs-ai-hero.png");
+        background-size: cover;
+        background-position: center;
+        opacity: 0.46;
+        filter: grayscale(0.2) contrast(1.05) saturate(0.9);
+      }
+
+      #heroChart {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.42;
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        width: min(1260px, 95vw);
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .hero-copy {
+        width: min(1060px, 100%);
+        margin: 0 auto;
+      }
+
+      .hero-label {
+        margin: -0.22rem 0 0;
+        font-size: 0.84rem;
+        text-transform: uppercase;
+        letter-spacing: 0.24em;
+        color: #adbfda;
+      }
+
+      .hero-intro {
+        margin: 0.5rem 0 0;
+        font-family: "Sora", sans-serif;
+        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: #8decc1;
+      }
+
+      .hero h1 {
+        margin: 1.55rem 0 0;
+        line-height: 0.9;
+        font-family: "Sora", sans-serif;
+        text-transform: uppercase;
+      }
+
+      .hero h1 span {
+        display: block;
+      }
+
+      .hero h1 .main {
+        font-size: clamp(3.6rem, 11vw, 8.6rem);
+        color: #f2f8ff;
+        text-shadow: 0 0 34px rgba(56, 176, 255, 0.52);
+      }
+
+      .hero h1 .vs {
+        margin-top: 0.2rem;
+        font-size: clamp(1.2rem, 3.4vw, 2.5rem);
+        color: #9fe7ff;
+      }
+
+      .hero h1 .sub {
+        margin-top: 0.95rem;
+        font-size: clamp(1.2rem, 3.1vw, 2.34rem);
+        color: #9ce4ff;
+        text-shadow: 0 0 16px rgba(51, 171, 255, 0.36);
+      }
+
+      .hero-sub {
+        margin: 2.3rem auto 0;
+        max-width: 82ch;
+        color: #e0eeff;
+        font-size: clamp(1.06rem, 1.9vw, 1.3rem);
+        line-height: 1.78;
+      }
+
+      .hero-meta {
+        margin-top: 2.55rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.72rem 1.1rem;
+      }
+
+      .meta-pill {
+        padding: 0.58rem 1.02rem;
+        border-radius: 999px;
+        border: 1px solid rgba(138, 179, 241, 0.36);
+        background: rgba(7, 16, 32, 0.78);
+        color: #e4f2ff;
+        font-size: 0.96rem;
+      }
+
+      .hero-claim {
+        margin-top: 1.45rem;
+        font-family: "Sora", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.9rem;
+        color: #a8e9ff;
+      }
+
+      .section {
+        position: relative;
+        padding: clamp(3.2rem, 5.3vw, 5.2rem) 0;
+      }
+
+      .section-title {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+        font-size: clamp(1.7rem, 4vw, 2.9rem);
+        line-height: 1.08;
+      }
+
+      .sub-title {
+        margin: 0.75rem 0 0;
+        font-family: "Sora", sans-serif;
+        font-size: clamp(1.2rem, 2.6vw, 2.1rem);
+        color: #dff1ff;
+      }
+
+      .section p {
+        margin: 0.9rem 0 0;
+        color: #cad9ef;
+        max-width: 74ch;
+      }
+
+      .lead {
+        color: #e3efff;
+        font-size: clamp(1rem, 1.65vw, 1.16rem);
+      }
+
+      .glow-line {
+        width: min(180px, 50%);
+        height: 2px;
+        margin-top: 0.9rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, var(--blue), rgba(64, 196, 255, 0), var(--green));
+        box-shadow: 0 0 20px rgba(47, 176, 255, 0.56);
+      }
+
+      .panel,
+      .quote,
+      .duel-card,
+      .rules-box,
+      .metrics-box,
+      .leaderboard-box,
+      .event-claim,
+      .audience-card,
+      .business-card,
+      .about-box,
+      .register-box {
+        border-radius: var(--radius);
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .quote,
+      .rules-box,
+      .metrics-box,
+      .leaderboard-box,
+      .event-claim,
+      .about-box,
+      .register-box {
+        padding: 1.2rem 1.3rem;
+      }
+
+      .quote {
+        margin-top: 1.2rem;
+        font-family: "Sora", sans-serif;
+        line-height: 1.55;
+      }
+
+      .dual-grid {
+        margin-top: 1.6rem;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        gap: 1rem;
+      }
+
+      .duel-card {
+        padding: 1.3rem;
+        transition: transform 0.24s ease, border-color 0.24s ease;
+      }
+
+      .duel-card:hover,
+      .audience-card:hover,
+      .business-card:hover,
+      .about-box:hover,
+      .rules-box:hover,
+      .metrics-box:hover,
+      .event-claim:hover {
+        transform: translateY(-4px);
+        border-color: rgba(100, 198, 255, 0.62);
+      }
+
+      .duel-card h3,
+      .audience-card h3,
+      .business-card h3,
+      .about-box h3 {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+      }
+
+      ul.clean {
+        margin: 0.95rem 0 0;
+        list-style: none;
+        padding: 0;
+      }
+
+      ul.clean li {
+        position: relative;
+        padding-left: 1rem;
+        margin-bottom: 0.44rem;
+        color: #d8e8fb;
+      }
+
+      ul.clean li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.65em;
+        width: 0.38rem;
+        height: 0.38rem;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #5fd5ff, #2df0b3);
+      }
+
+      .versus {
+        display: grid;
+        place-items: center;
+        min-width: 70px;
+        font-family: "Sora", sans-serif;
+        font-size: 2rem;
+        letter-spacing: 0.2em;
+        color: #9de5ff;
+      }
+
+      .rules-grid,
+      .live-grid,
+      .why-grid,
+      .about-grid,
+      .ftmo-grid {
+        margin-top: 1.6rem;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 1rem;
+      }
+
+      .metric-pills {
+        margin-top: 0.9rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.52rem;
+      }
+
+      .pill {
+        border-radius: 999px;
+        padding: 0.38rem 0.8rem;
+        border: 1px solid rgba(76, 216, 184, 0.44);
+        background: rgba(8, 28, 22, 0.52);
+        color: #d7ffe9;
+        font-size: 0.82rem;
+      }
+
+      .leaderboard-wrap {
+        margin-top: 0.95rem;
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid rgba(125, 160, 218, 0.26);
+        background: rgba(6, 13, 25, 0.9);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 640px;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 0.68rem 0.74rem;
+        border-bottom: 1px solid rgba(110, 144, 194, 0.2);
+        font-size: 0.86rem;
+      }
+
+      th {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.72rem;
+        color: #9db4d6;
+        background: rgba(13, 25, 45, 0.76);
+      }
+
+      .ai-row {
+        background: linear-gradient(90deg, rgba(15, 38, 71, 0.74), rgba(16, 45, 69, 0.34));
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.26rem 0.56rem;
+      }
+
+      .status-ai {
+        color: #081d14;
+        background: rgba(74, 245, 190, 0.85);
+      }
+
+      .status-live {
+        color: #e4f2ff;
+        background: rgba(65, 170, 255, 0.48);
+        border: 1px solid rgba(89, 182, 255, 0.58);
+      }
+
+      .tiny {
+        margin-top: 0.7rem;
+        font-size: 0.75rem;
+        color: #95add0;
+      }
+
+      .audience-grid,
+      .business-grid {
+        margin-top: 1.35rem;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.85rem;
+      }
+
+      .audience-card,
+      .business-card {
+        padding: 1rem;
+        transition: transform 0.22s ease, border-color 0.22s ease;
+      }
+
+      .audience-card p,
+      .business-card p {
+        margin: 0.62rem 0 0;
+        color: #cbdcf2;
+      }
+
+      .register .fomo {
+        margin-top: 0.75rem;
+        font-family: "Sora", sans-serif;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #8ff0c5;
+      }
+
+      .register-box {
+        margin-top: 1.3rem;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 0.84rem;
+      }
+
+      .field {
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      .field label {
+        font-size: 0.86rem;
+        color: #b5c8e7;
+      }
+
+      .field input,
+      .field select {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid rgba(129, 165, 225, 0.28);
+        background: rgba(8, 15, 28, 0.95);
+        color: #e7f3ff;
+        padding: 0.74rem 0.84rem;
+        font: inherit;
+      }
+
+      .field select {
+        appearance: none;
+        background-image: linear-gradient(45deg, transparent 50%, #8cc9ff 50%),
+          linear-gradient(135deg, #8cc9ff 50%, transparent 50%);
+        background-position: calc(100% - 16px) calc(50% + 2px), calc(100% - 11px) calc(50% + 2px);
+        background-size: 6px 6px, 6px 6px;
+        background-repeat: no-repeat;
+        padding-right: 2rem;
+      }
+
+      .field input:focus,
+      .field select:focus {
+        outline: none;
+        border-color: rgba(72, 191, 255, 0.8);
+        box-shadow: 0 0 0 3px rgba(61, 176, 255, 0.18);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        border: 0;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 0.78rem 1.38rem;
+        cursor: pointer;
+        color: #041120;
+        background: linear-gradient(115deg, #12a0ff, #33cbff 65%, #8beeff);
+        box-shadow: 0 14px 34px rgba(25, 157, 255, 0.4);
+      }
+
+      .form-row {
+        margin-top: 0.7rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        align-items: center;
+      }
+
+      #formMessage {
+        margin: 0;
+        color: #8ff0c5;
         opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
+        transform: translateY(2px);
+        transition: opacity 0.22s ease, transform 0.22s ease;
       }
-      .fade-up.show {
+
+      #formMessage.show {
         opacity: 1;
         transform: translateY(0);
       }
-      .glass {
-        background: rgba(10, 16, 32, 0.7);
-        border: 1px solid rgba(79, 209, 255, 0.15);
-        backdrop-filter: blur(10px);
+
+      footer {
+        margin-top: 1.9rem;
+        border-top: 1px solid rgba(114, 144, 196, 0.24);
+        padding: 2rem 0 2.3rem;
+        background: rgba(6, 10, 19, 0.84);
       }
-      .neon-border {
-        border: 1px solid rgba(79, 209, 255, 0.35);
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
       }
-      .text-gradient {
-        background: linear-gradient(90deg, #67e8f9, #8b5cf6, #4fd1ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+
+      .footer-title {
+        margin: 0;
+        font-family: "Sora", sans-serif;
       }
-      .timeline-line {
-        background: linear-gradient(180deg, #4fd1ff, #8b5cf6);
+
+      .footer-copy {
+        color: #bcd0ed;
+        margin-top: 0.45rem;
       }
-      .grid-dots {
-        background-image: radial-gradient(rgba(79, 209, 255, 0.12) 1px, transparent 1px);
-        background-size: 24px 24px;
+
+      .footer-note {
+        margin-top: 1rem;
+        font-size: 0.77rem;
+        color: #8ea4c7;
+        max-width: 90ch;
       }
-      .orb {
-        filter: blur(40px);
-        opacity: 0.65;
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1040px) {
+        .hero {
+          padding-top: calc(var(--header-h) + 3rem);
+          padding-bottom: 2.4rem;
+        }
+
+        .hero h1 .main {
+          font-size: clamp(3rem, 13vw, 6rem);
+        }
+
+        .hero h1 .vs {
+          font-size: clamp(1.05rem, 4.8vw, 1.9rem);
+        }
+
+        .hero h1 .sub {
+          font-size: clamp(1rem, 4.2vw, 1.7rem);
+        }
+
+        .dual-grid,
+        .rules-grid,
+        .live-grid,
+        .why-grid,
+        .about-grid,
+        .ftmo-grid,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .audience-grid,
+        .business-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        :root {
+          --header-h: 66px;
+        }
+
+        .brand {
+          font-size: 0.72rem;
+          letter-spacing: 0.16em;
+          text-align: center;
+        }
+
+        .hero {
+          min-height: auto;
+          padding-top: calc(var(--header-h) + 2.3rem);
+          padding-bottom: 1.8rem;
+        }
+
+        .hero-intro {
+          font-size: 0.72rem;
+          margin-top: 0.42rem;
+        }
+
+        .hero h1 {
+          margin-top: 1.2rem;
+        }
+
+        .hero h1 .main {
+          font-size: clamp(2.5rem, 14vw, 4.1rem);
+        }
+
+        .hero h1 .vs {
+          font-size: clamp(1rem, 4.8vw, 1.35rem);
+        }
+
+        .hero h1 .sub {
+          font-size: clamp(0.95rem, 5vw, 1.4rem);
+          margin-top: 0.62rem;
+        }
+
+        .hero-sub {
+          font-size: 1rem;
+          line-height: 1.62;
+          margin-top: 1.55rem;
+        }
+
+        .hero-meta {
+          margin-top: 1.75rem;
+        }
+
+        .meta-pill {
+          font-size: 0.86rem;
+          padding: 0.5rem 0.86rem;
+        }
+
+        .audience-grid,
+        .business-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
-  <body class="text-white antialiased">
-    <header class="relative overflow-hidden">
-      <div class="absolute inset-0 grid-dots opacity-40"></div>
-      <div class="absolute -top-20 -left-10 w-72 h-72 rounded-full bg-cyan-500/30 orb"></div>
-      <div class="absolute -top-24 right-10 w-96 h-96 rounded-full bg-violet-500/30 orb"></div>
-      <div class="max-w-6xl mx-auto px-6 pt-16 pb-20 relative">
-        <div class="grid gap-10 lg:grid-cols-2 items-center">
-          <div class="space-y-6 fade-up">
-            <p class="text-sm tracking-[0.3em] uppercase text-cyan-300/80">ROBOOTEC.AI</p>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight">
-              Automatické obchodování pro tradery, kteří chtějí systém
-            </h1>
-            <p class="text-lg text-white/70">
-              Propojte účet, vyberte strategii a nechte ROBOOTEC.AI obchodovat za vás. Bez emocí, bez programování, s jasnými pravidly rizika.
-            </p>
-            <div class="flex flex-wrap gap-4">
-              <a href="#pricing" class="px-6 py-3 rounded-full bg-cyan-400 text-black font-semibold hover:bg-cyan-300 transition glow">
-                Chci early access
-              </a>
-              <a href="#solution" class="px-6 py-3 rounded-full border border-cyan-300/40 text-cyan-200 hover:border-cyan-200 hover:text-white transition">
-                Zjistit více
-              </a>
-            </div>
-            <div class="flex flex-wrap items-center gap-4 text-sm text-white/60">
-              <div class="flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-cyan-300"></div>
-                Crowdfunding na Hithit.cz
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="text-cyan-200 font-semibold">3 min</span>
-                k aktivaci strategie
-              </div>
-            </div>
-            <div class="grid grid-cols-3 gap-4 pt-2 text-center">
-              <div class="glass rounded-xl px-4 py-3">
-                <div class="text-2xl font-semibold text-cyan-200">24/7</div>
-                <div class="text-xs text-white/60">monitoring</div>
-              </div>
-              <div class="glass rounded-xl px-4 py-3">
-                <div class="text-2xl font-semibold text-violet-200">AI</div>
-                <div class="text-xs text-white/60">real-time analýza</div>
-              </div>
-              <div class="glass rounded-xl px-4 py-3">
-                <div class="text-2xl font-semibold text-blue-200">Risk</div>
-                <div class="text-xs text-white/60">kontrola limitů</div>
-              </div>
-            </div>
-          </div>
-          <div class="fade-up">
-            <div class="aspect-video w-full rounded-2xl overflow-hidden neon-border glow">
-              <iframe
-                class="w-full h-full"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="ROBOOTEC.AI video"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <p class="mt-3 text-xs text-white/50">Video lze snadno nahradit vlastním odkazem.</p>
-          </div>
-        </div>
+  <body>
+    <header class="site-header">
+      <div class="container header-row">
+        <a href="#hero" class="brand">FTMO <span class="x">×</span> ROBOOTEC.AI</a>
       </div>
     </header>
 
-    <section id="problem" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="text-center max-w-3xl mx-auto space-y-4 fade-up">
-        <h2 class="text-3xl sm:text-4xl font-semibold text-gradient">Proč retail trader potřebuje systém</h2>
-        <p class="text-white/70">Trhy jsou rychlé, plné šumu a emoce často vítězí nad logikou. Automatizace vrací kontrolu.</p>
-      </div>
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="w-12 h-12 rounded-xl bg-cyan-400/10 text-cyan-300 flex items-center justify-center text-2xl">📊</div>
-          <h3 class="mt-4 text-xl font-semibold">Chaos dat</h3>
-          <p class="text-white/60 mt-2">Zprávy, grafy, sentiment, makro — vše se děje zároveň.</p>
+    <main>
+      <section class="hero" id="hero">
+        <div class="hero-watermark" aria-hidden="true"></div>
+        <canvas id="heroChart" aria-hidden="true"></canvas>
+        <div class="hero-inner reveal show">
+          <div class="hero-copy">
+            <p class="hero-label">FTMO × ROBOOTEC.AI</p>
+            <p class="hero-intro">Tenhle souboj jeste svet nevidel.</p>
+            <h1>
+              <span class="main">HUMAN</span>
+              <span class="vs">vs.</span>
+              <span class="main">AI</span>
+              <span class="sub">FIRST LIVE TRADING BATTLE</span>
+            </h1>
+            <p class="hero-sub">
+              Prvni verejny Human vs AI trading format.<br />
+              10 elitnich traderu proti prediktivnimu AI systemu ROBOOTEC.AI.<br />
+              Stejne podminky, stejna pravidla, stejny tlak realneho trhu.<br />
+              Zivy leaderboard pred publikem.
+            </p>
+            <div class="hero-meta">
+              <span class="meta-pill">29. 10. 2026 · 18:00</span>
+              <span class="meta-pill">O2 universum · Praha</span>
+              <span class="meta-pill">FTMO × ROBOOTEC.AI</span>
+            </div>
+            <p class="hero-claim">REAL DISCIPLINE. REAL EXECUTION. REAL-TIME LEADERBOARD.</p>
+          </div>
         </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="w-12 h-12 rounded-xl bg-violet-400/10 text-violet-300 flex items-center justify-center text-2xl">🧠</div>
-          <h3 class="mt-4 text-xl font-semibold">Emoce</h3>
-          <p class="text-white/60 mt-2">Strach a chamtivost vedou k impulzivním rozhodnutím.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="w-12 h-12 rounded-xl bg-blue-400/10 text-blue-300 flex items-center justify-center text-2xl">📉</div>
-          <h3 class="mt-4 text-xl font-semibold">Ztráty</h3>
-          <p class="text-white/60 mt-2">Bez systému je dlouhodobá výkonnost těžko udržitelná.</p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="solution" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="grid gap-12 lg:grid-cols-2 items-center">
-        <div class="space-y-6 fade-up">
-          <h2 class="text-3xl sm:text-4xl font-semibold">ROBOOTEC.AI: automatizace bez programování</h2>
-          <p class="text-white/70">
-            ROBOOTEC.AI propojuje technickou i fundamentální analýzu s AI modelem, který vyhodnocuje zprávy, data a sentiment. Vy jen nastavíte strategii a riziko.
+      <section class="section reveal" id="nova-era">
+        <div class="container">
+          <h2 class="section-title">Trading vstupuje do nove ery</h2>
+          <div class="glow-line"></div>
+          <p class="lead">
+            Sachy mely svuj moment Deep Blue vs. Kasparov. Go melo svuj moment AlphaGo. Trading ted ceka na
+            svuj vlastni historicky test.
           </p>
-          <ul class="space-y-3 text-white/80">
-            <li class="flex gap-3"><span class="text-cyan-300">✓</span> LONG / SHORT signály</li>
-            <li class="flex gap-3"><span class="text-cyan-300">✓</span> SL / TP úrovně</li>
-            <li class="flex gap-3"><span class="text-cyan-300">✓</span> Confidence score a risk profil</li>
-            <li class="flex gap-3"><span class="text-cyan-300">✓</span> Automatický execution u brokera</li>
-          </ul>
+          <p>
+            FTMO a ROBOOTEC.AI pripravuji prvni verejnou trading studii, ktera ukaze, jak si elitni lidsti
+            traderi povedou proti prediktivni umele inteligenci v realnem trznim prostredi.
+          </p>
+          <p>
+            Nejde o show bez obsahu. Jde o data, disciplinu, risk management a budoucnost rozhodovani na
+            financnich trzich.
+          </p>
+          <blockquote class="quote">
+            „V centru pozornosti neni konflikt cloveka s technologii. V centru pozornosti je kvalita
+            rozhodovani pod tlakem trhu.“
+          </blockquote>
         </div>
-        <div class="glass rounded-2xl p-8 fade-up">
-          <h3 class="text-xl font-semibold">Co AI vyhodnocuje</h3>
-          <div class="mt-6 grid gap-4">
-            <div class="flex items-center justify-between text-white/70">
-              <span>Market data</span><span class="text-cyan-300">Realtime</span>
+      </section>
+
+      <section class="section reveal" id="koncept-eventu">
+        <div class="container">
+          <h2 class="section-title">Koncept eventu</h2>
+          <p class="sub-title">10 traderu. 1 AI system. Stejna pravidla.</p>
+          <div class="glow-line"></div>
+          <div class="dual-grid">
+            <article class="duel-card">
+              <h3>ELITNI TRADERI</h3>
+              <ul class="clean">
+                <li>zkusenost</li>
+                <li>intuice</li>
+                <li>psychologie</li>
+                <li>schopnost reagovat na trh</li>
+                <li>discretionary trading</li>
+              </ul>
+            </article>
+            <div class="versus">VS</div>
+            <article class="duel-card">
+              <h3>ROBOOTEC.AI</h3>
+              <ul class="clean">
+                <li>zpracovani dat v realnem case</li>
+                <li>AI predikce</li>
+                <li>pattern recognition</li>
+                <li>sentiment analyza</li>
+                <li>rozhodovani bez emoci</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="pravidla">
+        <div class="container">
+          <h2 class="section-title">Transparentni podminky. Meritelne vysledky.</h2>
+          <div class="glow-line"></div>
+          <p>
+            Aby mela studie hodnotu, musi byt jednoducha, ferova a meritelna. Kazdy ucastnik bude hodnocen
+            podle stejnych metrik, ne podle dojmu, ale podle dat.
+          </p>
+          <div class="rules-grid">
+            <div class="rules-box">
+              <ul class="clean">
+                <li>Kazdy ucastnik obchoduje pres stejny typ FTMO uctu</li>
+                <li>Stejne trhy: NASDAQ / GOLD</li>
+                <li>Stejny casovy horizont</li>
+                <li>Stejna risk pravidla</li>
+                <li>Verejny leaderboard</li>
+                <li>Finalni vyhodnoceni vysledku</li>
+              </ul>
             </div>
-            <div class="flex items-center justify-between text-white/70">
-              <span>News & sentiment</span><span class="text-violet-300">Realtime</span>
+            <aside class="metrics-box">
+              <h3>Metriky</h3>
+              <div class="metric-pills">
+                <span class="pill">Profit</span>
+                <span class="pill">Max drawdown</span>
+                <span class="pill">Consistency</span>
+                <span class="pill">Risk-adjusted return</span>
+                <span class="pill">Win rate</span>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="leaderboard-preview">
+        <div class="container">
+          <h2 class="section-title">Live leaderboard preview</h2>
+          <div class="glow-line"></div>
+          <p>
+            Ukazka toho, jak muze vypadat verejne sledovani vysledku behem eventu. Cilem neni jen ukazat
+            profit, ale i kvalitu rizika, konzistenci a schopnost rozhodovat pod tlakem.
+          </p>
+          <div class="leaderboard-box">
+            <div class="leaderboard-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Poradi</th>
+                    <th>Ucastnik</th>
+                    <th>PnL</th>
+                    <th>Max DD</th>
+                    <th>Win rate</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="ai-row">
+                    <td>1</td>
+                    <td>ROBOOTEC.AI</td>
+                    <td>+4.8 %</td>
+                    <td>-0.7 %</td>
+                    <td>67 %</td>
+                    <td><span class="status status-ai">AI ACTIVE</span></td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Trader 07</td>
+                    <td>+3.2 %</td>
+                    <td>-1.1 %</td>
+                    <td>62 %</td>
+                    <td><span class="status status-live">LIVE</span></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Trader 03</td>
+                    <td>+2.1 %</td>
+                    <td>-0.9 %</td>
+                    <td>58 %</td>
+                    <td><span class="status status-live">LIVE</span></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Trader 10</td>
+                    <td>+1.4 %</td>
+                    <td>-1.6 %</td>
+                    <td>54 %</td>
+                    <td><span class="status status-live">LIVE</span></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Trader 01</td>
+                    <td>+0.8 %</td>
+                    <td>-0.5 %</td>
+                    <td>51 %</td>
+                    <td><span class="status status-live">LIVE</span></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <div class="flex items-center justify-between text-white/70">
-              <span>Fundamenty</span><span class="text-blue-300">Aktualizace</span>
+            <p class="tiny">Ilustracni data pro vizualizaci formatu.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="live">
+        <div class="container">
+          <h2 class="section-title">Nejen trading. Zivy fintech event.</h2>
+          <div class="glow-line"></div>
+          <div class="live-grid">
+            <div>
+              <div class="event-claim">
+                <h3>Prvni live trading event sveho druhu v Evrope</h3>
+                <ul class="clean">
+                  <li>O2 universum · Praha</li>
+                  <li>Limitovana kapacita</li>
+                  <li>Online stream pro globalni publikum</li>
+                </ul>
+              </div>
+              <p>
+                Cela udalost je navrzena jako premiovy zivy format kombinujici trading, technologie, data a
+                show. Nejde o agresivni fight night. Jde o moderni fintech event s energii velkeho
+                sportovniho vecera.
+              </p>
+              <div class="panel" style="margin-top: 0.9rem; padding: 1.1rem 1.2rem;">
+                <ul class="clean">
+                  <li>live leaderboard</li>
+                  <li>komentovany prubeh</li>
+                  <li>analyzy obchodnich rozhodnuti</li>
+                  <li>rozhovory s tradery</li>
+                  <li>ukazka AI signalu</li>
+                  <li>investorsky networking</li>
+                  <li>medialni vystupy</li>
+                  <li>online stream</li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel" style="min-height: 280px; background-image: linear-gradient(160deg, rgba(6,13,25,0.66), rgba(6,14,28,0.72)), url('./assets/human-vs-ai-hero.png'); background-size: cover; background-position: center; border: 1px solid rgba(122,161,226,0.34);"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="proc">
+        <div class="container">
+          <h2 class="section-title">Proc to muze zmenit pohled na trading</h2>
+          <div class="glow-line"></div>
+          <p>
+            Lidsky trader ma intuici, zkusenost a schopnost cist kontext. AI ma rychlost, konzistenci,
+            datovou kapacitu a zadne emoce.
+          </p>
+          <p>
+            Tato studie neresi otazku, zda ma AI cloveka nahradit. Resi otazku, jak bude vypadat budoucnost
+            tradingu, kde clovek a AI mohou stat vedle sebe.
+          </p>
+          <div class="why-grid">
+            <div class="panel" style="padding: 1.2rem 1.3rem;">
+              <ul class="clean">
+                <li>novy benchmark pro retail i prop trading</li>
+                <li>globalni PR moment</li>
+                <li>validace AI v realnem trhu</li>
+                <li>inspirace pro nove trading nastroje</li>
+                <li>propojeni traderu, investoru a fintech sveta</li>
+              </ul>
+            </div>
+            <blockquote class="quote">
+              „Vysledkem ma byt jasna datova reference pro komunitu traderu, investoru i financni instituce,
+              ktere hledaji novy standard prace s AI.“
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="robootec">
+        <div class="container">
+          <h2 class="section-title">ROBOOTEC.AI</h2>
+          <div class="glow-line"></div>
+          <div class="about-grid">
+            <article class="about-box">
+              <p>
+                ROBOOTEC.AI vyviji prediktivni AI trading platformu, ktera propojuje financni big data,
+                umelou inteligenci a algoritmicky trading.
+              </p>
+              <p>
+                Cilem je vytvorit system, ktery dokaze zpracovavat velke mnozstvi dat v realnem case,
+                vyhodnocovat trzni kontext, generovat obchodni signaly a podporovat rozhodovani bez emoci.
+              </p>
+            </article>
+            <article class="about-box">
+              <h3>Klicove oblasti</h3>
+              <ul class="clean">
+                <li>market data</li>
+                <li>sentiment</li>
+                <li>pattern recognition</li>
+                <li>AI predikce</li>
+                <li>strategie</li>
+                <li>risk management</li>
+                <li>auditni stopa</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="ftmo">
+        <div class="container">
+          <h2 class="section-title">FTMO</h2>
+          <div class="glow-line"></div>
+          <div class="ftmo-grid">
+            <div class="about-box">
+              <p>
+                FTMO patri mezi nejvyraznejsi svetove znacky v oblasti prop tradingu. Diky globalni komunite
+                traderu, silnemu brandu a zkusenosti s vyberem talentovanych obchodniku je prirozenym
+                partnerem pro vytvoreni prvniho verejneho Human vs AI trading experimentu.
+              </p>
+              <p>
+                Tento koncept je pripraven jako navrh partnerske spoluprace FTMO × ROBOOTEC.AI a jako podklad
+                pro spolecnou diskusi o formatu, pravidlech, komunikaci a budoucim obchodnim potencialu.
+              </p>
+            </div>
+            <div class="about-box">
+              <h3>Strategicky ramec</h3>
+              <ul class="clean">
+                <li>globalni dosah trading komunity</li>
+                <li>silna brand credibility</li>
+                <li>transparentni pravidla a evaluace</li>
+                <li>podklad pro dlouhodoby format eventu</li>
+              </ul>
             </div>
           </div>
-          <div class="mt-6 pt-6 border-t border-white/10 text-sm text-white/60">
-            Nastavíte limity, ROBOOTEC.AI dodržuje pravidla. Váš kapitál zůstává u brokera.
+        </div>
+      </section>
+
+      <section class="section reveal" id="pro-koho">
+        <div class="container">
+          <h2 class="section-title">Pro koho je udalost urcena</h2>
+          <div class="glow-line"></div>
+          <div class="audience-grid">
+            <article class="audience-card">
+              <h3>Traderi</h3>
+              <p>Chcete videt, jak si lidska intuice povede proti AI.</p>
+            </article>
+            <article class="audience-card">
+              <h3>Investori</h3>
+              <p>Hledate nove prilezitosti v AI, fintechu a automatizovanem tradingu.</p>
+            </article>
+            <article class="audience-card">
+              <h3>Financni spolecnosti</h3>
+              <p>Zajima vas, jak muze AI zmenit spravu kapitalu a rozhodovani.</p>
+            </article>
+            <article class="audience-card">
+              <h3>Media</h3>
+              <p>Pribeh clovek vs. umela inteligence ve svete penez a trhu.</p>
+            </article>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="how" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="text-center max-w-3xl mx-auto space-y-4 fade-up">
-        <h2 class="text-3xl sm:text-4xl font-semibold">Jak spustíte automatické obchodování</h2>
-        <p class="text-white/70">Jasný flow bez složité konfigurace.</p>
-      </div>
-      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-cyan-300 font-semibold">1. Připojení účtu</div>
-          <p class="text-white/60 mt-2">Bezpečné propojení u brokera, jen trading práva.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-violet-300 font-semibold">2. Výběr strategie</div>
-          <p class="text-white/60 mt-2">Zvolíte styl a riziko podle svého profilu.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-blue-300 font-semibold">3. AI analýza</div>
-          <p class="text-white/60 mt-2">Model vyhodnocuje data, zprávy i sentiment.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-cyan-200 font-semibold">4. Automatický execution</div>
-          <p class="text-white/60 mt-2">Signály se provedou s nastavenými limity.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="trust" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="text-center max-w-3xl mx-auto space-y-4 fade-up">
-        <h2 class="text-3xl sm:text-4xl font-semibold">Bezpečnost a kontrola</h2>
-        <p class="text-white/70">Automatické obchodování ano, ale vždy pod vaší kontrolou.</p>
-      </div>
-      <div class="mt-12 grid gap-6 md:grid-cols-3">
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-cyan-300 font-semibold">API pouze pro trading</div>
-          <p class="text-white/60 mt-2">Žádné výběry. Kapitál vždy zůstává u brokera.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-violet-300 font-semibold">Risk limity</div>
-          <p class="text-white/60 mt-2">Denní limit ztráty, max drawdown, stop trading.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-blue-300 font-semibold">Auditovatelné logy</div>
-          <p class="text-white/60 mt-2">Každý obchod má jasnou stopu a export.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="roadmap" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="text-center max-w-3xl mx-auto space-y-4 fade-up">
-        <h2 class="text-3xl sm:text-4xl font-semibold">Roadmap</h2>
-        <p class="text-white/70">Transparentní plán vývoje.</p>
-      </div>
-      <div class="mt-12 grid gap-8 md:grid-cols-2">
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="flex items-center gap-4">
-            <div class="w-3 h-3 rounded-full bg-cyan-300"></div>
-            <div class="text-lg font-semibold">Podzim 2026 → POC</div>
+      <section class="section reveal" id="business">
+        <div class="container">
+          <h2 class="section-title">Business potencial pro partnery</h2>
+          <div class="glow-line"></div>
+          <p>
+            Human vs AI Trading Battle neni pouze event. Je to platforma pro obsah, data, komunitu a nove
+            produkty v oblasti AI-assisted tradingu.
+          </p>
+          <div class="business-grid">
+            <article class="business-card">
+              <h3>Brand & PR</h3>
+              <p>
+                Prvni verejny Human vs AI trading experiment muze vytvorit silny medialni moment pro globalni
+                trading komunitu.
+              </p>
+            </article>
+            <article class="business-card">
+              <h3>Community</h3>
+              <p>Zapojeni traderu z celeho sveta pres kvalifikace, leaderboardy, streamy a obsahove serie.</p>
+            </article>
+            <article class="business-card">
+              <h3>Product</h3>
+              <p>Moznost navazat vyvojem AI nastroju pro tradery, signaly, risk analytics a decision support.</p>
+            </article>
+            <article class="business-card">
+              <h3>Investment</h3>
+              <p>Validace technologie v realnem prostredi a otevreni prostoru pro strategickou investici.</p>
+            </article>
           </div>
-          <div class="mt-4 text-white/60">Trading signály, dashboard, validace modelů.</div>
         </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="flex items-center gap-4">
-            <div class="w-3 h-3 rounded-full bg-violet-300"></div>
-            <div class="text-lg font-semibold">Léto 2027 → MVP</div>
+      </section>
+
+      <section class="section register reveal" id="register">
+        <div class="container">
+          <h2 class="section-title">Chci se zucastnit</h2>
+          <div class="glow-line"></div>
+          <p>
+            Zanechte nam kontakt a dame vam prednostni informace o eventu, programu, vstupenkach, online
+            streamu a moznostech partnerske spoluprace.
+          </p>
+          <p class="fomo">Limitovany pocet mist. Prednostni pristup pro registrovane zajemce.</p>
+          <div class="register-box">
+            <form id="interestForm" novalidate>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="name">Jmeno</label>
+                  <input id="name" name="name" type="text" required />
+                </div>
+                <div class="field">
+                  <label for="email">E-mail</label>
+                  <input id="email" name="email" type="email" required />
+                </div>
+                <div class="field">
+                  <label for="companyRole">Spolecnost / role</label>
+                  <input id="companyRole" name="companyRole" type="text" required />
+                </div>
+                <div class="field">
+                  <label for="interest">Mam zajem jako</label>
+                  <select id="interest" name="interest" required>
+                    <option value="Trader">Trader</option>
+                    <option value="Investor">Investor</option>
+                    <option value="Partner">Partner</option>
+                    <option value="Media">Media</option>
+                    <option value="Host">Host</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <button type="submit" class="btn">Odeslat zajem</button>
+                <p id="formMessage" role="status" aria-live="polite"></p>
+              </div>
+            </form>
           </div>
-          <div class="mt-4 text-white/60">Plnohodnotná trading aplikace s automatizací.</div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-    <section id="disclaimer" class="max-w-6xl mx-auto px-6 py-12">
-      <div class="glass rounded-2xl p-6 text-center fade-up">
-        <p class="text-white/80">
-          ROBOOTEC.AI nespravuje kapitál a negarantuje výnosy. Jedná se o nástroj pro podporu rozhodování.
-        </p>
-      </div>
-    </section>
-
-    <section id="pricing" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="text-center max-w-3xl mx-auto space-y-4 fade-up">
-        <h2 class="text-3xl sm:text-4xl font-semibold">Odměny / Pricing</h2>
-        <p class="text-white/70">Vyberte si úroveň podpory a získejte early access.</p>
-      </div>
-      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-sm text-white/60">FOUNDERS</div>
-          <div class="text-3xl font-semibold mt-2">3 990 Kč</div>
-          <ul class="mt-4 space-y-2 text-white/70">
-            <li>Early access</li>
-            <li>Prioritní beta</li>
-            <li>Komunita</li>
-          </ul>
-          <button class="mt-6 w-full py-2 rounded-full border border-cyan-300/40 hover:border-cyan-200 transition">Vybrat</button>
-        </div>
-
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-sm text-white/60">EARLY USERS</div>
-          <div class="text-3xl font-semibold mt-2">7 990 Kč</div>
-          <ul class="mt-4 space-y-2 text-white/70">
-            <li>Early access</li>
-            <li>Pokročilé signály</li>
-            <li>Komunita</li>
-          </ul>
-          <button class="mt-6 w-full py-2 rounded-full border border-cyan-300/40 hover:border-cyan-200 transition">Vybrat</button>
-        </div>
-
-        <div class="glass rounded-2xl p-6 fade-up glow relative">
-          <div class="absolute -top-3 right-4 text-xs bg-cyan-300 text-black px-3 py-1 rounded-full">nejvýhodnější</div>
-          <div class="text-sm text-white/60">ADVANCED</div>
-          <div class="text-3xl font-semibold mt-2">12 990 Kč</div>
-          <ul class="mt-4 space-y-2 text-white/70">
-            <li>Early access</li>
-            <li>VIP roadmap</li>
-            <li>Feedback call</li>
-          </ul>
-          <button class="mt-6 w-full py-2 rounded-full bg-cyan-400 text-black font-semibold hover:bg-cyan-300 transition">Vybrat</button>
-        </div>
-
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="text-sm text-white/60">LIFETIME</div>
-          <div class="text-3xl font-semibold mt-2">19 990 Kč</div>
-          <ul class="mt-4 space-y-2 text-white/70">
-            <li>Doživotní přístup</li>
-            <li>Všechny funkce</li>
-            <li>VIP komunita</li>
-          </ul>
-          <button class="mt-6 w-full py-2 rounded-full border border-cyan-300/40 hover:border-cyan-200 transition">Vybrat</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="text-center max-w-3xl mx-auto space-y-4 fade-up">
-        <h2 class="text-3xl sm:text-4xl font-semibold">FAQ</h2>
-        <p class="text-white/70">Nejčastější otázky před spuštěním.</p>
-      </div>
-      <div class="mt-12 grid gap-6 md:grid-cols-2">
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="font-semibold text-cyan-200">Mohu systém kdykoliv vypnout?</div>
-          <p class="text-white/60 mt-2">Ano, kdykoliv zastavíte automatické obchodování jedním klikem.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="font-semibold text-violet-200">Je to vhodné pro začátečníky?</div>
-          <p class="text-white/60 mt-2">Ano, díky přednastaveným profilům rizika a jasným limitům.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="font-semibold text-blue-200">Co když trh padá?</div>
-          <p class="text-white/60 mt-2">Risk management umí omezit ztráty a dočasně vypnout trading.</p>
-        </div>
-        <div class="glass rounded-2xl p-6 fade-up">
-          <div class="font-semibold text-cyan-200">Mám kontrolu nad kapitálem?</div>
-          <p class="text-white/60 mt-2">Ano, kapitál zůstává u brokera a obchodujete jen podle vašich pravidel.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="founder" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="glass rounded-2xl p-8 fade-up">
-        <div class="flex flex-col md:flex-row md:items-center gap-6">
-          <div class="w-20 h-20 rounded-full bg-cyan-300/20 flex items-center justify-center text-3xl">👨‍💼</div>
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
           <div>
-            <h3 class="text-2xl font-semibold">Radek Gelety</h3>
-            <p class="text-white/60">Founder & CEO</p>
-            <p class="mt-3 text-white/70">Budujeme AI platformu, která má ambici změnit způsob, jakým lidé obchodují.</p>
+            <h3 class="footer-title">FTMO × ROBOOTEC.AI</h3>
+            <p class="footer-copy">Human vs AI Trading Battle 2026</p>
+            <p class="footer-copy">29. 10. 2026 · 18:00</p>
+            <p class="footer-copy">O2 universum · Praha</p>
+          </div>
+          <div>
+            <h3 class="footer-title">Kontakt</h3>
+            <p class="footer-copy">Radek Gelety</p>
+            <p class="footer-copy">Founder & CEO</p>
+            <p class="footer-copy">ROBOOTEC.AI</p>
+            <p class="footer-copy">E-mail: <a href="mailto:radek@robootec.ai">radek@robootec.ai</a></p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="final-cta" class="max-w-6xl mx-auto px-6 py-16">
-      <div class="glass rounded-3xl p-10 text-center fade-up">
-        <h2 class="text-3xl sm:text-4xl font-semibold">Staňte se součástí nové generace tradingu</h2>
-        <p class="mt-4 text-white/70">Podpořte vznik první české AI trading platformy pro retail tradery.</p>
-        <a href="#pricing" class="inline-block mt-6 px-8 py-3 rounded-full bg-cyan-400 text-black font-semibold hover:bg-cyan-300 transition glow">
-          Podpořit projekt
-        </a>
-      </div>
-    </section>
-
-    <footer class="border-t border-white/10">
-      <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-white/60">
-        <div>
-          <div class="text-white font-semibold">ROBOOTEC.AI</div>
-          <div class="text-sm">Kontakt: info@robootec.ai</div>
-        </div>
-        <div class="flex gap-4 text-lg">
-          <a href="#" class="hover:text-cyan-300 transition">𝕏</a>
-          <a href="#" class="hover:text-cyan-300 transition">in</a>
-          <a href="#" class="hover:text-cyan-300 transition">yt</a>
-        </div>
+        <p class="footer-note">
+          Tato stranka predstavuje navrh konceptu partnerske udalosti Human vs AI Trading Battle 2026 a slouzi
+          pro ucely prezentace projektu. Detaily programu, partnerstvi, ucasti a obchodnich podminek budou
+          upresneny.
+        </p>
+        <p class="footer-note">
+          Uvedene obchodni vysledky a ukazkova data jsou ilustracni nebo historicka a nepredstavuji garanci
+          budouci vykonnosti.
+        </p>
       </div>
     </footer>
 
     <script>
-      const observer = new IntersectionObserver(
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) entry.target.classList.add("show");
+            if (entry.isIntersecting) {
+              entry.target.classList.add('show');
+              revealObserver.unobserve(entry.target);
+            }
           });
         },
         { threshold: 0.15 }
       );
+      revealElements.forEach((el) => {
+        if (!el.classList.contains('show')) revealObserver.observe(el);
+      });
 
-      document.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
+      const form = document.getElementById('interestForm');
+      const formMessage = document.getElementById('formMessage');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        form.reset();
+        formMessage.textContent = 'Dekujeme. Ozveme se vam s dalsimi informacemi.';
+        formMessage.classList.add('show');
+      });
+
+      const chartCanvas = document.getElementById('heroChart');
+      const ctx = chartCanvas.getContext('2d');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function resizeCanvas() {
+        const width = chartCanvas.clientWidth;
+        const height = chartCanvas.clientHeight;
+        const dpr = window.devicePixelRatio || 1;
+        chartCanvas.width = Math.floor(width * dpr);
+        chartCanvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function drawScene(time) {
+        const width = chartCanvas.clientWidth;
+        const height = chartCanvas.clientHeight;
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.strokeStyle = 'rgba(90, 128, 196, 0.16)';
+        ctx.lineWidth = 1;
+        for (let x = 0; x <= width; x += 90) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.stroke();
+        }
+        for (let y = 0; y <= height; y += 80) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(width, y);
+          ctx.stroke();
+        }
+
+        const points = 92;
+        const base = height * 0.58;
+        ctx.beginPath();
+        for (let i = 0; i < points; i++) {
+          const ratio = i / (points - 1);
+          const x = ratio * width;
+          const y =
+            base +
+            Math.sin(i * 0.21 + time * 0.0008) * 22 +
+            Math.cos(i * 0.075 + time * 0.0012) * 17 +
+            Math.sin(i * 0.047 + time * 0.0006) * 12;
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+
+        const gradient = ctx.createLinearGradient(0, 0, width, 0);
+        gradient.addColorStop(0, 'rgba(70, 170, 255, 0.74)');
+        gradient.addColorStop(0.7, 'rgba(74, 232, 201, 0.68)');
+        gradient.addColorStop(1, 'rgba(117, 243, 214, 0.2)');
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2.2;
+        ctx.stroke();
+      }
+
+      function animate(time) {
+        drawScene(time);
+        window.requestAnimationFrame(animate);
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      if (prefersReducedMotion) drawScene(0);
+      else window.requestAnimationFrame(animate);
     </script>
   </body>
 </html>

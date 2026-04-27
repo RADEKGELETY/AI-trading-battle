@@ -259,37 +259,62 @@
       .section {
         position: relative;
         padding: clamp(3.2rem, 5.3vw, 5.2rem) 0;
+        overflow: clip;
+      }
+
+      .section .container {
+        position: relative;
+        text-align: center;
+      }
+
+      .section .container > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      .section::before {
+        content: "";
+        position: absolute;
+        left: 10%;
+        right: 10%;
+        top: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(84, 159, 248, 0.55), transparent);
+        pointer-events: none;
       }
 
       .section-title {
         margin: 0;
         font-family: "Sora", sans-serif;
         font-size: clamp(1.7rem, 4vw, 2.9rem);
-        line-height: 1.08;
+        line-height: 1.03;
+        letter-spacing: 0.01em;
       }
 
       .sub-title {
-        margin: 0.75rem 0 0;
+        margin: 0.82rem auto 0;
         font-family: "Sora", sans-serif;
         font-size: clamp(1.2rem, 2.6vw, 2.1rem);
         color: #dff1ff;
+        max-width: 30ch;
       }
 
       .section p {
-        margin: 0.9rem 0 0;
+        margin: 0.92rem auto 0;
         color: #cad9ef;
-        max-width: 74ch;
+        max-width: 76ch;
       }
 
       .lead {
         color: #e3efff;
         font-size: clamp(1rem, 1.65vw, 1.16rem);
+        max-width: 80ch;
       }
 
       .glow-line {
         width: min(180px, 50%);
         height: 2px;
-        margin-top: 0.9rem;
+        margin: 1rem auto 0;
         border-radius: 999px;
         background: linear-gradient(90deg, var(--blue), rgba(64, 196, 255, 0), var(--green));
         box-shadow: 0 0 20px rgba(47, 176, 255, 0.56);
@@ -309,6 +334,34 @@
         border-radius: var(--radius);
         border: 1px solid var(--line);
         background: var(--panel);
+        position: relative;
+        overflow: hidden;
+        box-shadow:
+          0 22px 54px rgba(6, 16, 36, 0.52),
+          inset 0 1px 0 rgba(188, 220, 255, 0.1);
+        backdrop-filter: blur(7px);
+        -webkit-backdrop-filter: blur(7px);
+      }
+
+      .panel::before,
+      .quote::before,
+      .duel-card::before,
+      .rules-box::before,
+      .metrics-box::before,
+      .leaderboard-box::before,
+      .event-claim::before,
+      .audience-card::before,
+      .business-card::before,
+      .about-box::before,
+      .register-box::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(155, 209, 255, 0.65), transparent);
+        pointer-events: none;
       }
 
       .quote,
@@ -318,25 +371,29 @@
       .event-claim,
       .about-box,
       .register-box {
-        padding: 1.2rem 1.3rem;
+        padding: 1.32rem 1.36rem;
       }
 
       .quote {
-        margin-top: 1.2rem;
+        margin: 1.4rem auto 0;
         font-family: "Sora", sans-serif;
-        line-height: 1.55;
+        line-height: 1.62;
+        max-width: 900px;
       }
 
       .dual-grid {
-        margin-top: 1.6rem;
+        margin: 1.85rem auto 0;
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
         gap: 1rem;
+        max-width: 1060px;
+        align-items: stretch;
       }
 
       .duel-card {
-        padding: 1.3rem;
-        transition: transform 0.24s ease, border-color 0.24s ease;
+        padding: 1.45rem 1.28rem;
+        transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+        text-align: center;
       }
 
       .duel-card:hover,
@@ -348,6 +405,7 @@
       .event-claim:hover {
         transform: translateY(-4px);
         border-color: rgba(100, 198, 255, 0.62);
+        box-shadow: 0 16px 40px rgba(8, 24, 52, 0.42);
       }
 
       .duel-card h3,
@@ -356,26 +414,32 @@
       .about-box h3 {
         margin: 0;
         font-family: "Sora", sans-serif;
+        letter-spacing: 0.04em;
       }
 
       ul.clean {
-        margin: 0.95rem 0 0;
+        margin: 1rem auto 0;
         list-style: none;
         padding: 0;
+        display: grid;
+        gap: 0.42rem;
+        justify-items: center;
       }
 
       ul.clean li {
         position: relative;
         padding-left: 1rem;
-        margin-bottom: 0.44rem;
+        margin-bottom: 0;
         color: #d8e8fb;
+        width: min(430px, 100%);
+        text-align: left;
       }
 
       ul.clean li::before {
         content: "";
         position: absolute;
         left: 0;
-        top: 0.65em;
+        top: 0.68em;
         width: 0.38rem;
         height: 0.38rem;
         border-radius: 50%;
@@ -387,9 +451,10 @@
         place-items: center;
         min-width: 70px;
         font-family: "Sora", sans-serif;
-        font-size: 2rem;
+        font-size: 2.15rem;
         letter-spacing: 0.2em;
         color: #9de5ff;
+        text-shadow: 0 0 18px rgba(62, 182, 255, 0.42);
       }
 
       .rules-grid,
@@ -397,17 +462,20 @@
       .why-grid,
       .about-grid,
       .ftmo-grid {
-        margin-top: 1.6rem;
+        margin: 1.8rem auto 0;
         display: grid;
         grid-template-columns: 1.1fr 0.9fr;
         gap: 1rem;
+        max-width: 1060px;
+        align-items: stretch;
       }
 
       .metric-pills {
-        margin-top: 0.9rem;
+        margin-top: 0.95rem;
         display: flex;
         flex-wrap: wrap;
         gap: 0.52rem;
+        justify-content: center;
       }
 
       .pill {
@@ -417,6 +485,12 @@
         background: rgba(8, 28, 22, 0.52);
         color: #d7ffe9;
         font-size: 0.82rem;
+      }
+
+      .leaderboard-box {
+        margin: 1.3rem auto 0;
+        max-width: 1060px;
+        text-align: left;
       }
 
       .leaderboard-wrap {
@@ -479,26 +553,30 @@
         margin-top: 0.7rem;
         font-size: 0.75rem;
         color: #95add0;
+        text-align: center;
       }
 
       .audience-grid,
       .business-grid {
-        margin-top: 1.35rem;
+        margin: 1.5rem auto 0;
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 0.85rem;
+        max-width: 1080px;
       }
 
       .audience-card,
       .business-card {
-        padding: 1rem;
+        padding: 1.2rem 1.05rem;
         transition: transform 0.22s ease, border-color 0.22s ease;
+        text-align: center;
       }
 
       .audience-card p,
       .business-card p {
-        margin: 0.62rem 0 0;
+        margin: 0.62rem auto 0;
         color: #cbdcf2;
+        max-width: 32ch;
       }
 
       .register .fomo {
@@ -511,7 +589,8 @@
       }
 
       .register-box {
-        margin-top: 1.3rem;
+        margin: 1.4rem auto 0;
+        max-width: 760px;
       }
 
       .form-grid {
@@ -578,6 +657,7 @@
         flex-wrap: wrap;
         gap: 0.8rem;
         align-items: center;
+        justify-content: center;
       }
 
       #formMessage {
@@ -604,6 +684,9 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 1rem;
+        max-width: 980px;
+        margin: 0 auto;
+        text-align: center;
       }
 
       .footer-title {
@@ -617,10 +700,11 @@
       }
 
       .footer-note {
-        margin-top: 1rem;
+        margin: 1rem auto 0;
         font-size: 0.77rem;
         color: #8ea4c7;
         max-width: 90ch;
+        text-align: center;
       }
 
       .reveal {
@@ -720,6 +804,19 @@
         .meta-pill {
           font-size: 0.86rem;
           padding: 0.5rem 0.86rem;
+        }
+
+        .section {
+          padding: 3rem 0;
+        }
+
+        .section p {
+          max-width: 40ch;
+        }
+
+        ul.clean li {
+          width: 100%;
+          max-width: 100%;
         }
 
         .audience-grid,

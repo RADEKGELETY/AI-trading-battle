@@ -299,6 +299,14 @@
         max-width: 30ch;
       }
 
+      .sentence-lines span {
+        display: block;
+      }
+
+      .sentence-lines span + span {
+        margin-top: 0.16rem;
+      }
+
       .section p {
         margin: 0.92rem auto 0;
         color: #cad9ef;
@@ -396,6 +404,18 @@
         text-align: center;
       }
 
+      .duel-card,
+      .rules-box,
+      .metrics-box,
+      .leaderboard-box,
+      .event-claim,
+      .panel,
+      .about-box,
+      .audience-card,
+      .business-card {
+        text-align: center;
+      }
+
       .duel-card:hover,
       .audience-card:hover,
       .business-card:hover,
@@ -490,7 +510,7 @@
       .leaderboard-box {
         margin: 1.3rem auto 0;
         max-width: 1060px;
-        text-align: left;
+        text-align: center;
       }
 
       .leaderboard-wrap {
@@ -513,6 +533,23 @@
         padding: 0.68rem 0.74rem;
         border-bottom: 1px solid rgba(110, 144, 194, 0.2);
         font-size: 0.86rem;
+      }
+
+      .duel-card ul.clean li,
+      .rules-box ul.clean li,
+      .event-claim ul.clean li,
+      .panel ul.clean li,
+      .about-box ul.clean li {
+        text-align: center;
+        padding-left: 0;
+      }
+
+      .duel-card ul.clean li::before,
+      .rules-box ul.clean li::before,
+      .event-claim ul.clean li::before,
+      .panel ul.clean li::before,
+      .about-box ul.clean li::before {
+        display: none;
       }
 
       th {
@@ -868,8 +905,9 @@
           <h2 class="section-title">Trading vstupuje do nové éry</h2>
           <div class="glow-line"></div>
           <p class="lead">
-            Šachy měly svůj moment Deep Blue vs. Kasparov. Go mělo svůj moment AlphaGo. Trading teď čeká na
-            svůj vlastní historický test.
+            Šachy měly svůj moment Deep Blue vs. Kasparov.<br />
+            Go mělo svůj moment AlphaGo.<br />
+            Trading teď čeká na svůj vlastní historický test.
           </p>
           <p>
             FTMO a ROBOOTEC.AI připravují první veřejnou tradingovou studii, která ukáže, jak si elitní lidští
@@ -889,7 +927,11 @@
       <section class="section reveal" id="koncept-eventu">
         <div class="container">
           <h2 class="section-title">Koncept eventu</h2>
-          <p class="sub-title">10 traderů. 1 AI systém. Stejná pravidla.</p>
+          <p class="sub-title sentence-lines">
+            <span>10 traderů.</span>
+            <span>1 AI systém.</span>
+            <span>Stejná pravidla.</span>
+          </p>
           <div class="glow-line"></div>
           <div class="dual-grid">
             <article class="duel-card">
@@ -922,8 +964,8 @@
           <h2 class="section-title">Transparentní podmínky. Měřitelné výsledky.</h2>
           <div class="glow-line"></div>
           <p>
-            Aby měla studie hodnotu, musí být jednoduchá, férová a měřitelná. Každý účastník bude hodnocen
-            podle stejných metrik, ne podle dojmu, ale podle dat.
+            Aby měla studie hodnotu, musí být jednoduchá, férová a měřitelná.<br />
+            Každý účastník bude hodnocen podle stejných metrik, ne podle dojmu, ale podle dat.
           </p>
           <div class="rules-grid">
             <div class="rules-box">
@@ -955,8 +997,8 @@
           <h2 class="section-title">Live leaderboard preview</h2>
           <div class="glow-line"></div>
           <p>
-            Ukázka toho, jak může vypadat veřejné sledování výsledků během eventu. Cílem není jen ukázat
-            profit, ale i kvalitu řízení rizika, konzistenci a schopnost rozhodovat pod tlakem.
+            Ukázka toho, jak může vypadat veřejné sledování výsledků během eventu.<br />
+            Cílem není jen ukázat profit, ale i kvalitu řízení rizika, konzistenci a schopnost rozhodovat pod tlakem.
           </p>
           <div class="leaderboard-box">
             <div class="leaderboard-wrap">
@@ -1035,9 +1077,9 @@
                 </ul>
               </div>
               <p>
-                Celá událost je navržena jako prémiový živý formát kombinující trading, technologie, data a
-                show. Nejde o agresivní fight night. Jde o moderní fintech event s energií velkého
-                sportovního večera.
+                Celá událost je navržena jako prémiový živý formát kombinující trading, technologie, data a show.<br />
+                Nejde o agresivní fight night.<br />
+                Jde o moderní fintech event s energií velkého sportovního večera.
               </p>
               <div class="panel" style="margin-top: 0.9rem; padding: 1.1rem 1.2rem;">
                 <ul class="clean">
@@ -1066,8 +1108,8 @@
             datovou kapacitu a žádné emoce.
           </p>
           <p>
-            Tato studie neřeší otázku, zda má AI člověka nahradit. Řeší otázku, jak bude vypadat budoucnost
-            tradingu, kde člověk a AI mohou stát vedle sebe.
+            Tato studie neřeší otázku, zda má AI člověka nahradit.<br />
+            Řeší otázku, jak bude vypadat budoucnost tradingu, kde člověk a AI mohou stát vedle sebe.
           </p>
           <div class="why-grid">
             <div class="panel" style="padding: 1.2rem 1.3rem;">
